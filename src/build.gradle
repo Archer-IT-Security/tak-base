@@ -13,7 +13,7 @@ buildscript {
 
   dependencies {
     classpath 'org.ajoberstar:grgit:1.7.2'
-//    classpath 'gradle.plugin.se.bjurr.violations:violations-gradle-plugin:1.52.2'
+//    classpath 'com.gradleup.shadow:com.gradleup.shadow.gradle.plugin:8.1.1'
 //    classpath 'com.github.jk1:gradle-license-report:1.17'
   }
 }
@@ -173,7 +173,7 @@ subprojects {
     }
 
     dependencies {
-      classpath 'gradle.plugin.com.github.johnrengelman:shadow:' + gradle_shadow_version
+      classpath 'com.gradleup.shadow:com.gradleup.shadow.gradle.plugin' + gradle_shadow_version
 //      classpath 'gradle.plugin.se.bjurr.violations:violations-gradle-plugin:1.52.2'
 //      classpath 'com.github.jk1:gradle-license-report:1.17'
     }
