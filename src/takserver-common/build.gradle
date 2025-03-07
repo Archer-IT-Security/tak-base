@@ -90,7 +90,7 @@ dependencies {
 
   api group: 'com.zaxxer', name: 'HikariCP', version: hikaricp_version
 
-  api project(':takserver-fig-core')
+  implementation project(':takserver-fig-core')
 
   testImplementation group: 'junit', name: 'junit', version: junit_version
   testImplementation group: 'org.json', name: 'json', version: json_org_version

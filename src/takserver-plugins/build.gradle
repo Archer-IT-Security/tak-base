@@ -20,7 +20,7 @@ publishing {
 }
 dependencies {
 
-  api ("com.google.protobuf:protobuf-java:$protobuf_java_version") {
+  implementation ("com.google.protobuf:protobuf-java:$protobuf_java_version") {
     exclude group: 'javax.annotation'
     exclude group: 'javax.activation'
     exclude group: 'com.google.guava'
@@ -30,7 +30,7 @@ dependencies {
   implementation group: 'org.slf4j', name: 'slf4j-api', version: slf4j_version
   implementation group: 'org.slf4j', name: 'log4j-over-slf4j', version: slf4j_version
 
-  api(project(':takserver-protobuf')) {
+  implementation(project(':takserver-protobuf')) {
     exclude group: 'io.grpc'
     exclude group: 'io.netty'
   }

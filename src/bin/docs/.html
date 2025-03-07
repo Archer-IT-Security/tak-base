@@ -1,0 +1,151 @@
+Application tasks
+-----------------
+bootRun - Runs this project as a Spring Boot application.
+bootTestRun - Runs this project as a Spring Boot application using the test runtime classpath.
+run - Runs this project as a JVM application
+runShadow - Runs this project as a JVM application using the shadow jar
+startShadowScripts - Creates OS specific scripts to run the project as a JVM application using the shadow jar
+
+Build tasks
+-----------
+assemble - Assembles the outputs of this project.
+bootBuildImage - Builds an OCI image of the application using the output of the bootJar 
+task
+bootJar - Assembles an executable jar archive containing the main classes and their dependencies.
+bootWar - Assembles an executable war archive containing webapp content, and the main classes and their dependencies.
+build - Assembles and tests this project.
+buildDependents - Assembles and tests this project and all projects that depend on it.  
+buildNeeded - Assembles and tests this project and all projects it depends on.
+classes - Assembles main classes.
+clean - Deletes the build directory.
+coreClasses - Assembles core classes.
+cursedtakClasses - Assembles cursedtak classes.
+exeClasses - Assembles exe classes.
+generateLicense - Generates the license file.
+integrationTestClasses - Assembles integration test classes.
+jar - Assembles a jar archive containing the main classes.
+resolveMainClassName - Resolves the name of the application's main class.
+resolveTestMainClassName - Resolves the name of the application's test main class.      
+rpmClasses - Assembles rpm classes.
+testClasses - Assembles test classes.
+war - Generates a war archive with all the compiled classes, the web-app content and the libraries.
+
+Build Setup tasks
+-----------------
+init - Initializes a new Gradle build.
+wrapper - Generates Gradle wrapper files.
+
+BundleAndDeploy tasks
+---------------------
+bundle
+deployToCore
+
+Distribution tasks
+------------------
+assembleBootDist - Assembles the boot distributions
+assembleDist - Assembles the main distributions
+assembleShadowDist - Assembles the shadow distributions
+bootDistTar - Bundles the project as a distribution.
+bootDistZip - Bundles the project as a distribution.
+distTar - Bundles the project as a distribution.
+distZip - Bundles the project as a distribution.
+installBootDist - Installs the project as a distribution as-is.
+installDist - Installs the project as a distribution as-is.
+installShadowDist - Installs the project as a distribution as-is.
+shadowDistTar - Bundles the project as a distribution.
+shadowDistZip - Bundles the project as a distribution.
+
+Documentation tasks
+-------------------
+javadoc - Generates Javadoc API documentation for the main source code.
+
+Help tasks
+----------
+buildEnvironment - Displays all buildscript dependencies declared in root project 'takserver-parent'.
+dependencies - Displays all dependencies declared in root project 'takserver-parent'.   
+dependencyInsight - Displays the insight into a specific dependency in root project 'takserver-parent'.
+help - Displays a help message.
+javaToolchains - Displays the detected java toolchains.
+outgoingVariants - Displays the outgoing variants of root project 'takserver-parent'.   
+projects - Displays the sub-projects of root project 'takserver-parent'.
+properties - Displays the properties of root project 'takserver-parent'.
+resolvableConfigurations - Displays the configurations that can be resolved in root project 'takserver-parent'.
+tasks - Displays the tasks runnable from root project 'takserver-parent' (some of the displayed tasks may belong to subprojects).
+
+IDE tasks
+---------
+cleanEclipse - Cleans all Eclipse files.
+cleanEclipseWtp - Cleans Eclipse wtp configuration files.
+cleanIdea - Cleans IDEA project files (IML, IPR)
+eclipse - Generates all Eclipse files.
+eclipseWtp - Generates Eclipse wtp configuration files.
+idea - Generates IDEA project files (IML, IPR, IWS)
+openIdea - Opens the IDEA project
+
+Node tasks
+----------
+nodeSetup - Download and install a local node/npm version.
+
+Npm tasks
+---------
+npmInstall - Install node packages from package.json.
+npmSetup - Setup a specific version of npm to be used by the build.
+
+OpenAPI Tools tasks
+-------------------
+openApiGenerate - Generate code via Open API Tools Generator for Open API 2.0 or 3.x specification documents.
+openApiGenerators - Lists generators available via Open API Generators.
+openApiMeta - Generates a new generator to be consumed via Open API Generator.
+openApiValidate - Validates an Open API 2.0 or 3.x specification document.
+
+Publishing tasks
+----------------
+generateMetadataFileForMavenJavaPublication - Generates the Gradle metadata file for publication 'mavenJava'.
+generateMetadataFileForShadowjarPublication - Generates the Gradle metadata file for publication 'shadowjar'.
+generatePomFileForMavenJavaPublication - Generates the Maven POM file for publication 'mavenJava'.
+generatePomFileForShadowjarPublication - Generates the Maven POM file for publication 'shadowjar'.
+publish - Publishes all publications produced by this project.
+publishAllPublicationsToMavenRepository - Publishes all Maven publications produced by this project to the maven repository.
+publishMavenJavaPublicationToMavenLocal - Publishes Maven publication 'mavenJava' to the local Maven repository.
+publishShadowjarPublicationToMavenLocal - Publishes Maven publication 'shadowjar' to the local Maven repository.
+publishShadowjarPublicationToMavenRepository - Publishes Maven publication 'shadowjar' to Maven repository 'maven'.
+publishToMavenLocal - Publishes all Maven publications produced by this project to the local Maven cache.
+
+Shadow tasks
+------------
+knows - Do you know who knows?
+shadowJar - Create a combined JAR of project and runtime dependencies
+
+TAKServer tasks
+---------------
+devDeployAux - Rebuilds and copies takserver.war, takserver-pm.jar, takserver-retention.jar, and takcl.jar into their appropriate location in takserver-package/build/takArtifacts
+devDeployCore - Rebuilds and copies takserver.war, takserver-pm.jar, takserver-retention.jar, and takcl.jar into their appropriate location in takserver-package/build/takArtifacts
+devDeployFedHub - Rebuilds and copies federation hub into their appropriate location in 
+takserver-package/build/takArtifacts
+devDeployTakcl - Rebuilds and copies takserver.war, takserver-pm.jar, takserver-retention.jar, and takcl.jar into their appropriate location in takserver-package/build/takArtifacts
+
+Verification tasks
+------------------
+check - Runs all checks.
+integrationTest - Executes integration test using the takcl framework
+test - Runs the test suite.
+
+Yarn tasks
+----------
+yarn - Install node packages using Yarn.
+yarnSetup - Setup a specific version of Yarn to be used by the build.
+
+Rules
+-----
+Pattern: clean<TaskName>: Cleans the output files of a task.
+Pattern: build<ConfigurationName>: Assembles the artifacts of a configuration.
+
+To see all tasks and more detail, run gradlew tasks --all
+
+To see more detail about a task, run gradlew help --task <task>
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 8.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+See https://docs.gradle.org/7.5.1/userguide/command_line_interface.html#sec:command_line_warnings

@@ -1,0 +1,18 @@
+{
+    "java.home": "C:\\Program Files\\BellSoft\\LibericaJDK-17-Full",
+    "gradle.debug": true,
+    "java.docPath": [
+        "G:\\tak\\tak-base\\src\\docs"
+    ],
+    "java.dependency.packagePresentation": "hierarchical",
+    "java.jdt.ls.java.home": "C:\\Program Files\\BellSoft\\LibericaJDK-17-Full",
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "gradle.javaDebug.cleanOutput": true,
+    "gradle.nestedProjects": true,
+    "jdk.jdkhome": "C:\\Program Files\\BellSoft\\LibericaJDK-17-Full",
+    "jdk.project.jdkhome": "C:\\Program Files\\BellSoft\\LibericaJDK-17-Full",
+    "jdk.test.editor.enableShortcuts": true,
+    "jdk.verbose": true,
+    "terminal.integrated.enableImages": true,
+    "terminal.integrated.wordSeparators": " ()[]{}',\"`─‘’“”|"
+}

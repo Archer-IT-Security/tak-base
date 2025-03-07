@@ -10,5 +10,8 @@
   "license": [
     "MIT",
     "OFL-1.1"
-  ]
+  ],
+  "dependencies": {
+    "components-font-awesome": "file:"
+  }
 }

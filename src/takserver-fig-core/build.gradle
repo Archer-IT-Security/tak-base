@@ -3,15 +3,15 @@ apply plugin: 'java-library'
 dependencies {
 
   // use protobuf generated code from takserver-protobuf project
-  api project(':takserver-protobuf')
+  implementation project(':takserver-protobuf')
 
   implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: log4j_api_version
   implementation group: 'org.apache.logging.log4j', name: 'log4j-to-slf4j', version: log4j_api_version
   implementation group: 'org.slf4j', name: 'slf4j-api', version: slf4j_version
   implementation group: 'org.slf4j', name: 'log4j-over-slf4j', version: slf4j_version
 
-  //api 'javax.xml.bind:jaxb-api:' + jaxb_api_version
-  api group: 'jakarta.xml.bind', name: 'jakarta.xml.bind-api', version: jakarta_xml_bind_api_version
+  //implementation 'javax.xml.bind:jaxb-api:' + jaxb_api_version
+  implementation group: 'jakarta.xml.bind', name: 'jakarta.xml.bind-api', version: jakarta_xml_bind_api_version
 
   //implementation 'javax.activation:activation:' + javax_activation_version
 
@@ -22,7 +22,7 @@ dependencies {
   implementation group: 'com.google.guava', name: 'guava', version: guava_version
 
   // jackson
-  api group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: jackson_version
+  implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: jackson_version
   implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: jackson_version
   implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: jackson_version
 
@@ -33,7 +33,7 @@ dependencies {
   implementation group: 'commons-codec', name: 'commons-codec', version: commons_codec_version
 
   // ROL
-  api project(':takserver-fig-core:rol')
+  implementation project(':takserver-fig-core:rol')
 
 }
 

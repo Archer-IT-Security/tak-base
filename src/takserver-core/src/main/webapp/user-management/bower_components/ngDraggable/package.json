@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/fatlinesofcode/ngDraggable/issues"
   },
-  "homepage": "https://github.com/fatlinesofcode/ngDraggable#readme"
+  "homepage": "https://github.com/fatlinesofcode/ngDraggable#readme",
+  "dependencies": {
+    "ngdraggable": "file:"
+  }
 }
