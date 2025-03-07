@@ -93,15 +93,34 @@ clean {
 }
 
 //Generates protobuf code, applies the patch
-task applyGrpcPatch{
-  dependsOn 'generateProto'
-  description 'Patches the generated protobuf to make it compatible with both versions 2 and 3'
-  doLast{
-  //Ant used to apply the patch file
-  //(Need to specify the specific file that is getting patched because ant can't figure out which file to patch from the diff file)
-  ant.patch(patchfile: 'proto2compatFix.patch', originalfile: 'build/generated/source/proto/main/java/com/atakmap/Tak/GeoEvent.java')
-}
-println 'APPLYING PROTO PATCH'
+task applyGrpcPatch {
+    dependsOn 'generateProto'
+    description 'Patches the generated protobuf to make it compatible with both versions 2 and 3'
+    doLast {
+        def file = file('build/generated/source/proto/main/java/com/atakmap/Tak/GeoEvent.java')
+        if (!file.exists()) {
+            throw new GradleException("Generated protobuf file not found: ${file.absolutePath}")
+        }
+
+        def content = file.text
+        
+        // Remove the conditional checks for double fields
+        content = content.replaceAll(/if \(lat_ != 0D\) \{\n\s+output\.writeDouble\(4, lat_\);\n\s+\}/, 'output.writeDouble(4, lat_);')
+        content = content.replaceAll(/if \(lon_ != 0D\) \{\n\s+output\.writeDouble\(5, lon_\);\n\s+\}/, 'output.writeDouble(5, lon_);')
+        content = content.replaceAll(/if \(hae_ != 0D\) \{\n\s+output\.writeDouble\(6, hae_\);\n\s+\}/, 'output.writeDouble(6, hae_);')
+        content = content.replaceAll(/if \(ce_ != 0D\) \{\n\s+output\.writeDouble\(7, ce_\);\n\s+\}/, 'output.writeDouble(7, ce_);')
+        content = content.replaceAll(/if \(le_ != 0D\) \{\n\s+output\.writeDouble\(8, le_\);\n\s+\}/, 'output.writeDouble(8, le_);')
+        
+        // Remove size computation conditionals
+        content = content.replaceAll(/if \(lat_ != 0D\) \{\n\s+size \+= com\.google\.protobuf\.CodedOutputStream\n\s+\.computeDoubleSize\(4, lat_\);\n\s+\}/, 'size += com.google.protobuf.CodedOutputStream.computeDoubleSize(4, lat_);')
+        content = content.replaceAll(/if \(lon_ != 0D\) \{\n\s+size \+= com\.google\.protobuf\.CodedOutputStream\n\s+\.computeDoubleSize\(5, lon_\);\n\s+\}/, 'size += com.google.protobuf.CodedOutputStream.computeDoubleSize(5, lon_);')
+        content = content.replaceAll(/if \(hae_ != 0D\) \{\n\s+size \+= com\.google\.protobuf\.CodedOutputStream\n\s+\.computeDoubleSize\(6, hae_\);\n\s+\}/, 'size += com.google.protobuf.CodedOutputStream.computeDoubleSize(6, hae_);')
+        content = content.replaceAll(/if \(ce_ != 0D\) \{\n\s+size \+= com\.google\.protobuf\.CodedOutputStream\n\s+\.computeDoubleSize\(7, ce_\);\n\s+\}/, 'size += com.google.protobuf.CodedOutputStream.computeDoubleSize(7, ce_);')
+        content = content.replaceAll(/if \(le_ != 0D\) \{\n\s+size \+= com\.google\.protobuf\.CodedOutputStream\n\s+\.computeDoubleSize\(8, le_\);\n\s+\}/, 'size += com.google.protobuf.CodedOutputStream.computeDoubleSize(8, le_);')
+        
+        file.write(content)
+        println 'APPLIED PROTO PATCH'
+    }
 }
 
 compileJava.finalizedBy(tasks.applyGrpcPatch)
