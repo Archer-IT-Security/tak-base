@@ -99,24 +99,29 @@ task applyGrpcPatch {
     doLast {
         def file = file('build/generated/source/proto/main/java/com/atakmap/Tak/GeoEvent.java')
         if (!file.exists()) {
-            throw new GradleException("Generated protobuf file not found: ${file.absolutePath}")
+            println "ERROR: Generated protobuf file not found: ${file.absolutePath}"
+            return
         }
 
         def content = file.text
         
-        // Remove the conditional checks for double fields
-        content = content.replaceAll(/if \(lat_ != 0D\) \{\n\s+output\.writeDouble\(4, lat_\);\n\s+\}/, 'output.writeDouble(4, lat_);')
-        content = content.replaceAll(/if \(lon_ != 0D\) \{\n\s+output\.writeDouble\(5, lon_\);\n\s+\}/, 'output.writeDouble(5, lon_);')
-        content = content.replaceAll(/if \(hae_ != 0D\) \{\n\s+output\.writeDouble\(6, hae_\);\n\s+\}/, 'output.writeDouble(6, hae_);')
-        content = content.replaceAll(/if \(ce_ != 0D\) \{\n\s+output\.writeDouble\(7, ce_\);\n\s+\}/, 'output.writeDouble(7, ce_);')
-        content = content.replaceAll(/if \(le_ != 0D\) \{\n\s+output\.writeDouble\(8, le_\);\n\s+\}/, 'output.writeDouble(8, le_);')
+        // Remove the conditional checks for double fields and size computations
+        def fields = ['lat', 'lon', 'hae', 'ce', 'le']
+        def fieldIndices = [4, 5, 6, 7, 8]
         
-        // Remove size computation conditionals
-        content = content.replaceAll(/if \(lat_ != 0D\) \{\n\s+size \+= com\.google\.protobuf\.CodedOutputStream\n\s+\.computeDoubleSize\(4, lat_\);\n\s+\}/, 'size += com.google.protobuf.CodedOutputStream.computeDoubleSize(4, lat_);')
-        content = content.replaceAll(/if \(lon_ != 0D\) \{\n\s+size \+= com\.google\.protobuf\.CodedOutputStream\n\s+\.computeDoubleSize\(5, lon_\);\n\s+\}/, 'size += com.google.protobuf.CodedOutputStream.computeDoubleSize(5, lon_);')
-        content = content.replaceAll(/if \(hae_ != 0D\) \{\n\s+size \+= com\.google\.protobuf\.CodedOutputStream\n\s+\.computeDoubleSize\(6, hae_\);\n\s+\}/, 'size += com.google.protobuf.CodedOutputStream.computeDoubleSize(6, hae_);')
-        content = content.replaceAll(/if \(ce_ != 0D\) \{\n\s+size \+= com\.google\.protobuf\.CodedOutputStream\n\s+\.computeDoubleSize\(7, ce_\);\n\s+\}/, 'size += com.google.protobuf.CodedOutputStream.computeDoubleSize(7, ce_);')
-        content = content.replaceAll(/if \(le_ != 0D\) \{\n\s+size \+= com\.google\.protobuf\.CodedOutputStream\n\s+\.computeDoubleSize\(8, le_\);\n\s+\}/, 'size += com.google.protobuf.CodedOutputStream.computeDoubleSize(8, le_);')
+        fields.eachWithIndex { field, idx ->
+            def index = fieldIndices[idx]
+            // Replace write conditionals
+            content = content.replaceAll(
+                /if \(${field}_ != 0D\) \{\n\s+output\.writeDouble\(${index}, ${field}_\);\n\s+\}/,
+                "output.writeDouble(${index}, ${field}_);"
+            )
+            // Replace size computation conditionals
+            content = content.replaceAll(
+                /if \(${field}_ != 0D\) \{\n\s+size \+= com\.google\.protobuf\.CodedOutputStream\n\s+\.computeDoubleSize\(${index}, ${field}_\);\n\s+\}/,
+                "size += com.google.protobuf.CodedOutputStream.computeDoubleSize(${index}, ${field}_);"
+            )
+        }
         
         file.write(content)
         println 'APPLIED PROTO PATCH'

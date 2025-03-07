@@ -5,6 +5,28 @@ dependencies {
   // use protobuf generated code from takserver-protobuf project
   implementation project(':takserver-protobuf')
 
+  // gRPC
+  implementation (group: 'io.grpc', name: 'grpc-netty', version: grpc_version) {
+    exclude group: 'io.perfmark', module: 'perfmark-api'
+  }
+  implementation (group: 'io.grpc', name: 'grpc-protobuf', version: grpc_version) {
+    exclude group: 'io.perfmark', module: 'perfmark-api'
+  }
+  implementation (group: 'io.grpc', name: 'grpc-stub', version: grpc_version) {
+    exclude group: 'io.perfmark', module: 'perfmark-api'
+  }
+  implementation (group: 'io.grpc', name: 'grpc-core', version: grpc_version) {
+    exclude group: 'io.perfmark', module: 'perfmark-api'
+  }
+  implementation group: 'io.perfmark', name: 'perfmark-api', version: perfmark_api_version
+  
+  // Error prone annotations
+  implementation group: 'com.google.errorprone', name: 'error_prone_annotations', version: '2.18.0'
+
+  // Netty
+  implementation group: 'io.netty', name: 'netty-all', version: netty_version
+  implementation group: 'io.netty', name: 'netty-tcnative-boringssl-static', version: netty_tcnative_version
+
   implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: log4j_api_version
   implementation group: 'org.apache.logging.log4j', name: 'log4j-to-slf4j', version: log4j_api_version
   implementation group: 'org.slf4j', name: 'slf4j-api', version: slf4j_version
